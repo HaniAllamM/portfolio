@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hani Allam – Hama Lohnservice</title>
+<meta name="description" content="Hani Allam – Freiberuflicher Lohnbuchhalter. Lohnabrechnung, Einsätze, Beratung." />
+<style>
+  :root{
+    --accent:#2b6cb0;
+    --bg:#f7f9fc;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --maxw:1000px;
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    margin:0; background:var(--bg); color:#0f1724; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:32px auto; padding:20px;}
+  header{display:flex;gap:16px;align-items:center;background:linear-gradient(90deg,var(--accent),#1e90b6); color:white;padding:28px;border-radius:var(--radius);}
+  .logo{width:72px;height:72px;border-radius:12px;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-weight:700}
+  header h1{font-size:1.6rem;margin:0}
+  header p{margin:2px 0 0;font-size:0.95rem;opacity:0.95}
+
+  main{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:20px}
+  @media(max-width:880px){ main{grid-template-columns:1fr} header{flex-direction:column; text-align:center} .logo{margin-bottom:6px} }
+
+  .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,36,0.06)}
+  .section + .section{margin-top:12px}
+  h2{color:var(--accent);margin:0 0 10px 0}
+  p{color:var(--muted);margin:0 0 10px 0}
+
+  /* sidebar */
+  aside .card + .card{margin-top:16px}
+  .contact a{display:inline-block;background:var(--accent);color:white;padding:10px 14px;border-radius:8px;text-decoration:none}
+  .info-row{display:flex;gap:10px;align-items:center;margin:8px 0;color:var(--muted)}
+
+  .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .tag{background:#eef6ff;color:var(--accent);padding:6px 10px;border-radius:8px;font-size:0.9rem}
+
+  footer{text-align:center;margin-top:20px;color:var(--muted);font-size:0.9rem;padding:10px}
+  a.inline{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">HA</div>
+      <div>
+        <h1>Hani Allam — Hama Lohnservice</h1>
+        <p>Freiberuflicher Lohnbuchhalter (befristlich) — Lohnabrechnung · Beratung · Einsätze</p>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="card section">
+          <h2>Über mich</h2>
+          <p>Ich bin freiberuflicher Lohnbuchhalter mit Erfahrung in Lohnabrechnung, Meldungen, Fehlzeitenverwaltung und Neueinstellungen. Ich arbeite projektbezogen und unterstütze kleine und mittlere Unternehmen bei der laufenden Lohnbuchhaltung.</p>
+        </div>
+
+        <div class="card section">
+          <h2>Leistungen</h2>
+          <ul>
+            <li>Komplette Lohnabrechnung und Entgeltabrechnung</li>
+            <li>Ein- und Austrittsmeldungen, Sozialversicherung</li>
+            <li>Fehlzeit- und Abwesenheitsverwaltung</li>
+            <li>Beratung bei steuer- und sozialversicherungsrechtlichen Fragen</li>
+            <li>Einrichtung &amp; Betreuung der Ablage/Datensicherung (lokal oder MinIO)</li>
+          </ul>
+        </div>
+
+        <div class="card section">
+          <h2>Referenzen / Projekte</h2>
+          <p>Hier kannst du kurz ein bis zwei Projekte oder Kunden nennen — z.B. „Projekte: Lohnabrechnung für KMU in Branche X“.</p>
+        </div>
+
+        <div class="card section">
+          <h2>Kontakt</h2>
+          <p class="info-row">Email: <a class="inline" href="mailto:dein.email@beispiel.de">dein.email@beispiel.de</a></p>
+          <p class="info-row">Telefon: <span>+49 123 456789</span></p>
+
+          <!-- Kontakt-Button: Formspree example or mailto -->
+          <p style="margin-top:10px">
+            <!-- Option A: mailto -->
+            <a href="mailto:dein.email@beispiel.de?subject=Anfrage%20Lohnservice" class="contact btn">E-Mail schreiben</a>
+          </p>
+          <p style="margin-top:8px;color:var(--muted);font-size:0.9rem">Oder: Kontaktformular (Formspree) nutzen für einfache Nachrichten.</p>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h2>Kurzinfo</h2>
+          <p><strong>Ort:</strong> Deutschland</p>
+          <p><strong>Status:</strong> Freiberufler (befristlich)</p>
+          <div class="skills">
+            <span class="tag">Lohnabrechnung</span>
+            <span class="tag">SV-Meldungen</span>
+            <span class="tag">Fehlzeiten</span>
+            <span class="tag">MinIO / MySQL</span>
+            <span class="tag">WPF / C#</span>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h2>Impressum</h2>
+          <p style="font-size:0.95rem;color:var(--muted)">Hani Allam<br>
+          Hama Lohnservice<br>
+          Musterstraße 1<br>
+          12345 Ort<br>
+          Email: <a class="inline" href="mailto:dein.email@beispiel.de">dein.email@beispiel.de</a></p>
+          <p style="font-size:0.85rem;color:var(--muted)"><a href="#datenschutz" class="inline">Datenschutzerklärung</a></p>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h2>Social</h2>
+          <p><a href="https://www.linkedin.com/in/hani-allam-2829a91a1" target="_blank" class="inline">LinkedIn</a></p>
+          <p><a href="https://github.com/HaniAllamM" target="_blank" class="inline">GitHub</a></p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div id="datenschutz" style="text-align:left;max-width:900px;margin:12px auto;font-size:0.9rem;color:var(--muted)">
+        <strong>Datenschutzerklärung (Kurzversion)</strong>
+        <p>Diese Website ist eine rein informative Profilseite. Es werden keine persönlichen Nutzerdaten auf diesem Webspace gesammelt. Für Kontaktaufnahme nutzen Sie bitte die angegebene E-Mail-Adresse oder ein externes Formular (z. B. via Formspree). Details zum Datenschutz erhalten Sie auf Anfrage.</p>
+        <p style="margin-top:8px">© <span id="year"></span> Hani Allam – Hama Lohnservice</p>
+      </div>
+    </footer>
+
+  </div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
