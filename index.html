@@ -1,141 +1,865 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Hani Allam – Hama Lohnservice</title>
-<meta name="description" content="Hani Allam – Freiberuflicher Lohnbuchhalter. Lohnabrechnung, Einsätze, Beratung." />
-<style>
-  :root{
-    --accent:#2b6cb0;
-    --bg:#f7f9fc;
-    --card:#ffffff;
-    --muted:#6b7280;
-    --maxw:1000px;
-    --radius:10px;
-  }
-  *{box-sizing:border-box}
-  body{
-    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    margin:0; background:var(--bg); color:#0f1724; -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:var(--maxw); margin:32px auto; padding:20px;}
-  header{display:flex;gap:16px;align-items:center;background:linear-gradient(90deg,var(--accent),#1e90b6); color:white;padding:28px;border-radius:var(--radius);}
-  .logo{width:72px;height:72px;border-radius:12px;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-weight:700}
-  header h1{font-size:1.6rem;margin:0}
-  header p{margin:2px 0 0;font-size:0.95rem;opacity:0.95}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hani Allam - Lohnbuchhalter & Entwickler</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  main{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:20px}
-  @media(max-width:880px){ main{grid-template-columns:1fr} header{flex-direction:column; text-align:center} .logo{margin-bottom:6px} }
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #3b82f6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+        }
 
-  .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,36,0.06)}
-  .section + .section{margin-top:12px}
-  h2{color:var(--accent);margin:0 0 10px 0}
-  p{color:var(--muted);margin:0 0 10px 0}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
 
-  /* sidebar */
-  aside .card + .card{margin-top:16px}
-  .contact a{display:inline-block;background:var(--accent);color:white;padding:10px 14px;border-radius:8px;text-decoration:none}
-  .info-row{display:flex;gap:10px;align-items:center;margin:8px 0;color:var(--muted)}
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-  .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .tag{background:#eef6ff;color:var(--accent);padding:6px 10px;border-radius:8px;font-size:0.9rem}
+        nav.scrolled {
+            padding: 8px 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
 
-  footer{text-align:center;margin-top:20px;color:var(--muted);font-size:0.9rem;padding:10px}
-  a.inline{color:var(--accent);text-decoration:none}
-</style>
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Services Section */
+        #services {
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 15px;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .project-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #e0e7ff;
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">HA</div>
-      <div>
-        <h1>Hani Allam — Hama Lohnservice</h1>
-        <p>Freiberuflicher Lohnbuchhalter (befristlich) — Lohnabrechnung · Beratung · Einsätze</p>
-      </div>
-    </header>
-
-    <main>
-      <section>
-        <div class="card section">
-          <h2>Über mich</h2>
-          <p>Ich bin freiberuflicher Lohnbuchhalter mit Erfahrung in Lohnabrechnung, Meldungen, Fehlzeitenverwaltung und Neueinstellungen. Ich arbeite projektbezogen und unterstütze kleine und mittlere Unternehmen bei der laufenden Lohnbuchhaltung.</p>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="logo">Hani Allam</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">Über mich</a></li>
+                <li><a href="#services" onclick="closeMenu()">Leistungen</a></li>
+                <li><a href="#projects" onclick="closeMenu()">Projekte</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Kontakt</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <div class="card section">
-          <h2>Leistungen</h2>
-          <ul>
-            <li>Komplette Lohnabrechnung und Entgeltabrechnung</li>
-            <li>Ein- und Austrittsmeldungen, Sozialversicherung</li>
-            <li>Fehlzeit- und Abwesenheitsverwaltung</li>
-            <li>Beratung bei steuer- und sozialversicherungsrechtlichen Fragen</li>
-            <li>Einrichtung &amp; Betreuung der Ablage/Datensicherung (lokal oder MinIO)</li>
-          </ul>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hani Allam</h1>
+            <p class="subtitle">Freiberuflicher Lohnbuchhalter & Softwareentwickler</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Kontakt aufnehmen</a>
+                <a href="#projects" class="btn btn-outline">Projekte ansehen</a>
+            </div>
         </div>
+    </section>
 
-        <div class="card section">
-          <h2>Referenzen / Projekte</h2>
-          <p>Hier kannst du kurz ein bis zwei Projekte oder Kunden nennen — z.B. „Projekte: Lohnabrechnung für KMU in Branche X“.</p>
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title">Über mich</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Professionelle Lohnbuchhaltung trifft moderne Technologie</h3>
+                <p>Mit jahrelanger Erfahrung in der Lohnbuchhaltung und einer Leidenschaft für Softwareentwicklung biete ich maßgeschneiderte Lösungen für Ihr Unternehmen.</p>
+                <p>Ich unterstütze kleine und mittlere Unternehmen bei der kompletten Lohnabrechnung, Sozialversicherungsmeldungen und entwickle individuelle Tools zur Prozessoptimierung.</p>
+                <p>Meine technische Expertise ermöglicht es mir, effiziente und moderne Lösungen zu schaffen, die Ihre Buchhaltungsprozesse vereinfachen.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-name">Lohnabrechnung</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">C# / .NET</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">MySQL / MinIO</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">WPF Desktop Apps</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">SV-Meldungen</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Beratung</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="card section">
-          <h2>Kontakt</h2>
-          <p class="info-row">Email: <a class="inline" href="mailto:dein.email@beispiel.de">dein.email@beispiel.de</a></p>
-          <p class="info-row">Telefon: <span>+49 123 456789</span></p>
-
-          <!-- Kontakt-Button: Formspree example or mailto -->
-          <p style="margin-top:10px">
-            <!-- Option A: mailto -->
-            <a href="mailto:dein.email@beispiel.de?subject=Anfrage%20Lohnservice" class="contact btn">E-Mail schreiben</a>
-          </p>
-          <p style="margin-top:8px;color:var(--muted);font-size:0.9rem">Oder: Kontaktformular (Formspree) nutzen für einfache Nachrichten.</p>
+    <!-- Services Section -->
+    <section id="services" class="fade-in">
+        <h2 class="section-title">Meine Leistungen</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>Lohnabrechnung</h3>
+                <p>Komplette Entgeltabrechnung, Ein- und Austrittsmeldungen, Sozialversicherung und Fehlzeitenverwaltung für Ihr Unternehmen.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Softwareentwicklung</h3>
+                <p>Entwicklung maßgeschneiderte Desktop-Anwendungen mit C# und WPF zur Automatisierung Ihrer Geschäftsprozesse.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Beratung & Support</h3>
+                <p>Professionelle Beratung bei steuer- und sozialversicherungsrechtlichen Fragen sowie technischer Support.</p>
+            </div>
         </div>
-      </section>
+    </section>
 
-      <aside>
-        <div class="card">
-          <h2>Kurzinfo</h2>
-          <p><strong>Ort:</strong> Deutschland</p>
-          <p><strong>Status:</strong> Freiberufler (befristlich)</p>
-          <div class="skills">
-            <span class="tag">Lohnabrechnung</span>
-            <span class="tag">SV-Meldungen</span>
-            <span class="tag">Fehlzeiten</span>
-            <span class="tag">MinIO / MySQL</span>
-            <span class="tag">WPF / C#</span>
-          </div>
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <h2 class="section-title">Referenzen & Projekte</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">📋</div>
+                <div class="project-info">
+                    <h3>Lohn-Management System</h3>
+                    <p>Entwicklung eines umfassenden Lohnverwaltungssystems mit automatisierter Abrechnung und Meldewesen.</p>
+                    <div class="project-tags">
+                        <span class="tag">C#</span>
+                        <span class="tag">WPF</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">🗄️</div>
+                <div class="project-info">
+                    <h3>Dokumenten-Archivierung</h3>
+                    <p>Implementation einer sicheren Dokumentenverwaltung mit MinIO für Cloud-Storage und lokale Backups.</p>
+                    <div class="project-tags">
+                        <span class="tag">MinIO</span>
+                        <span class="tag">Cloud</span>
+                        <span class="tag">Security</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">📈</div>
+                <div class="project-info">
+                    <h3>KMU Lohnservice</h3>
+                    <p>Komplette Lohnbuchhaltung für kleine und mittlere Unternehmen verschiedener Branchen mit über 200 Mitarbeitern.</p>
+                    <div class="project-tags">
+                        <span class="tag">Lohnabrechnung</span>
+                        <span class="tag">SV</span>
+                        <span class="tag">Consulting</span>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="card" style="margin-top:12px">
-          <h2>Impressum</h2>
-          <p style="font-size:0.95rem;color:var(--muted)">Hani Allam<br>
-          Hama Lohnservice<br>
-          Musterstraße 1<br>
-          12345 Ort<br>
-          Email: <a class="inline" href="mailto:dein.email@beispiel.de">dein.email@beispiel.de</a></p>
-          <p style="font-size:0.85rem;color:var(--muted)"><a href="#datenschutz" class="inline">Datenschutzerklärung</a></p>
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Kontakt</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>ihre.email@beispiel.de</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h3>Telefon</h3>
+                        <p>+49 123 456789</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h3>Standort</h3>
+                        <p>Deutschland</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Nachricht</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Nachricht senden</button>
+            </form>
         </div>
+    </section>
 
-        <div class="card" style="margin-top:12px">
-          <h2>Social</h2>
-          <p><a href="https://www.linkedin.com/in/hani-allam-2829a91a1" target="_blank" class="inline">LinkedIn</a></p>
-          <p><a href="https://github.com/HaniAllamM" target="_blank" class="inline">GitHub</a></p>
-        </div>
-      </aside>
-    </main>
-
+    <!-- Footer -->
     <footer>
-      <div id="datenschutz" style="text-align:left;max-width:900px;margin:12px auto;font-size:0.9rem;color:var(--muted)">
-        <strong>Datenschutzerklärung (Kurzversion)</strong>
-        <p>Diese Website ist eine rein informative Profilseite. Es werden keine persönlichen Nutzerdaten auf diesem Webspace gesammelt. Für Kontaktaufnahme nutzen Sie bitte die angegebene E-Mail-Adresse oder ein externes Formular (z. B. via Formspree). Details zum Datenschutz erhalten Sie auf Anfrage.</p>
-        <p style="margin-top:8px">© <span id="year"></span> Hani Allam – Hama Lohnservice</p>
-      </div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/hani-allam-2829a91a1" target="_blank">in</a>
+            <a href="https://github.com/HaniAllamM" target="_blank">gh</a>
+        </div>
+        <p>&copy; <span id="year"></span> Hani Allam - Hama Lohnservice. Alle Rechte vorbehalten.</p>
     </footer>
 
-  </div>
+    <script>
+        // Current year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.remove('active');
+        }
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Animate skill bars on scroll
+        const skillObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const skillsSection = document.querySelector('.skills-grid');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            alert(`Vielen Dank für Ihre Nachricht, ${name}! Ich melde mich in Kürze bei Ihnen.`);
+            event.target.reset();
+        }
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            hero.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
+        });
+    </script>
 </body>
 </html>
