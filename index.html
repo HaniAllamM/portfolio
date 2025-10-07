@@ -3,23 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hani Allam – Lohnbuchhalter & Fachassistent Lohn und Gehalt (in Weiterbildung)</title>
+    <title>Hani Allam – Lohnbuchhalter & Fachassistent Lohn und Gehalt</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         :root {
             --primary: #2563eb;
-            --secondary: #1e40af;
+            --primary-dark: #1e40af;
+            --accent: #8b5cf6;
             --dark: #0f172a;
-            --light: #f8fafc;
+            --dark-light: #1e293b;
             --gray: #64748b;
+            --gray-light: #94a3b8;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: var(--dark);
             background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            margin: 5px 0;
+            transition: 0.3s;
         }
 
         /* Navigation */
@@ -27,265 +55,747 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 100;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px var(--shadow);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 5px 0;
+            box-shadow: 0 4px 30px var(--shadow);
         }
 
         nav .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 15px 20px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         nav .logo {
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 24px;
+            font-weight: 700;
             color: var(--primary);
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 25px;
+            gap: 35px;
         }
 
         nav a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 500;
+            font-size: 15px;
             transition: color 0.3s;
+            position: relative;
         }
 
-        nav a:hover { color: var(--primary); }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            text-align: center;
-            padding: 160px 20px 100px;
+            padding: 180px 30px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            animation: fadeInUp 0.8s ease;
         }
 
-        .hero p {
-            font-size: 1.4rem;
+        .hero .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            margin-bottom: 15px;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
             opacity: 0.9;
             max-width: 700px;
-            margin: 0 auto 30px;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
         }
 
-        /* Section */
+        .hero-cta {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
         section {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 20px;
+            padding: 100px 30px;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 50px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             color: var(--dark);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 60px;
         }
 
         /* About Section */
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--gray);
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        /* Services */
-        .services-grid {
+        .about-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
 
-        .service-card {
+        .about-text p {
+            font-size: 1.05rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .about-text strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .stat-card {
             background: white;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
+            box-shadow: 0 4px 20px var(--shadow);
             text-align: center;
+            transition: transform 0.3s;
         }
 
-        .service-card:hover { transform: translateY(-8px); }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
 
-        .service-card h3 {
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .service-card p { color: var(--gray); }
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
 
-        /* Contact */
-        .contact-container {
+        /* Skills Section */
+        .skills-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px var(--shadow);
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .skill-card h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .skill-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -48px;
+            top: 35px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--light);
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .timeline-item p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
 
         .contact-item {
-            background: white;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
             padding: 20px;
+            background: var(--light);
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
         }
 
-        .contact-item h3 { color: var(--primary); margin-bottom: 5px; }
+        .contact-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: white;
+            color: var(--primary);
+        }
+
+        .contact-details h3 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            color: var(--gray);
+        }
+
+        .contact-item:hover .contact-details p {
+            color: white;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
 
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 14px;
             border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
         }
 
         .contact-form button {
             background: var(--primary);
             color: white;
-            padding: 14px 30px;
+            padding: 16px 32px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            transition: background 0.3s;
+            font-size: 1rem;
+            transition: all 0.3s;
         }
 
-        .contact-form button:hover { background: var(--secondary); }
+        .contact-form button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--shadow);
+        }
 
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
+            padding: 60px 30px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
-            padding: 40px 20px;
         }
 
-        footer p {
-            max-width: 800px;
-            margin: 10px auto;
-            font-size: 0.95rem;
+        .footer-content p {
             opacity: 0.8;
+            line-height: 1.8;
+            margin: 10px 0;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .contact-container { grid-template-columns: 1fr; }
-            nav ul { display: none; }
+        .footer-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 30px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            nav ul {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 280px;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 30px;
+                box-shadow: -5px 0 20px var(--shadow);
+                transition: right 0.3s ease;
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-wrapper {
+                padding: 40px 30px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline-item {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="container">
             <a href="#" class="logo">Hani Allam</a>
-            <ul>
-                <li><a href="#about">Über mich</a></li>
-                <li><a href="#services">Leistungen</a></li>
-                <li><a href="#contact">Kontakt</a></li>
+            <button class="mobile-menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">Über mich</a></li>
+                <li><a href="#skills" onclick="closeMenu()">Kompetenzen</a></li>
+                <li><a href="#experience" onclick="closeMenu()">Erfahrung</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Kontakt</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1>Hani Allam</h1>
-        <p>Lohnbuchhalter & Fachassistent Lohn und Gehalt (in Weiterbildung)</p>
-        <p>Präzision, Zuverlässigkeit und Leidenschaft für die Lohn- und Gehaltsabrechnung.</p>
+        <div class="hero-content">
+            <h1>Hani Allam</h1>
+            <p class="subtitle">Lohnbuchhalter & Fachassistent Lohn und Gehalt</p>
+            <p class="description">Präzision, Zuverlässigkeit und Leidenschaft für die Lohn- und Gehaltsabrechnung. Mit fundierter Berufserfahrung und kontinuierlicher Weiterbildung sorge ich für korrekte und termingerechte Abrechnungen.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn">Kontakt aufnehmen</a>
+                <a href="#about" class="btn btn-secondary">Mehr erfahren</a>
+            </div>
+        </div>
     </section>
 
-    <!-- About -->
+    <!-- About Section -->
     <section id="about">
         <h2 class="section-title">Über mich</h2>
-        <div class="about-text">
-            <p>Ich bin Lohnbuchhalter mit fundierter Berufserfahrung in der Entgeltabrechnung und den angrenzenden Bereichen des Personalwesens.  
-            Derzeit arbeite ich in Vollzeit und bilde mich zum <strong>Fachassistenten Lohn und Gehalt</strong> weiter.</p>
-            <p>Meine Arbeit zeichnet sich durch Genauigkeit, Verantwortungsbewusstsein und ein ausgeprägtes Verständnis für Datenanalyse und Prozessoptimierung aus.  
-            Ich arbeite gerne mit Excel und setze moderne Methoden zur Auswertung und Kontrolle von Abrechnungsdaten ein.</p>
-            <p>Diese Webseite dient ausschließlich der Vorstellung meiner beruflichen Kenntnisse – ich biete keine steuerliche oder rechtliche Beratung an.</p>
+        <p class="section-subtitle">Erfahrener Lohnbuchhalter mit Fokus auf Qualität und Prozessoptimierung</p>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Ich bin Lohnbuchhalter mit fundierter Berufserfahrung in der Entgeltabrechnung und den angrenzenden Bereichen des Personalwesens. Derzeit arbeite ich in Vollzeit und bilde mich zum <strong>Fachassistenten Lohn und Gehalt</strong> weiter.</p>
+                <p>Meine Arbeit zeichnet sich durch Genauigkeit, Verantwortungsbewusstsein und ein ausgeprägtes Verständnis für Datenanalyse und Prozessoptimierung aus. Ich arbeite gerne mit Excel und setze moderne Methoden zur Auswertung und Kontrolle von Abrechnungsdaten ein.</p>
+                <p>Ich lege großen Wert auf die Einhaltung gesetzlicher Vorgaben und eine vertrauensvolle Zusammenarbeit mit allen Beteiligten.</p>
+            </div>
+            <div class="about-stats">
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Präzision & Zuverlässigkeit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Excel</div>
+                    <div class="stat-label">Datenanalyse Experte</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">SV</div>
+                    <div class="stat-label">Sozialversicherung</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">DATEV</div>
+                    <div class="stat-label">Abrechnungssoftware</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Leistungen -->
-    <section id="services">
-        <h2 class="section-title">Fachliche Schwerpunkte</h2>
-        <div class="services-grid">
-            <div class="service-card">
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Fachliche Kompetenzen</h2>
+        <p class="section-subtitle">Umfassendes Know-how in allen Bereichen der Lohn- und Gehaltsabrechnung</p>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">💰</div>
                 <h3>Lohn- und Gehaltsabrechnung</h3>
-                <p>Erstellung und Kontrolle von Lohnabrechnungen, Pflege von Mitarbeiterdaten, Abwicklung von Ein- und Austritten.</p>
+                <p>Erstellung und Kontrolle von Lohnabrechnungen, Pflege von Mitarbeiterdaten, Abwicklung von Ein- und Austritten sowie Überwachung von Fristen.</p>
             </div>
-            <div class="service-card">
+            <div class="skill-card">
+                <div class="skill-icon">🏥</div>
                 <h3>Sozialversicherung & Meldewesen</h3>
-                <p>Bearbeitung von SV-Meldungen, Beitragsnachweisen, ELStAM und elektronischem Meldeverfahren.</p>
+                <p>Bearbeitung von SV-Meldungen, Beitragsnachweisen, ELStAM und elektronischem Meldeverfahren gemäß aktueller Rechtslage.</p>
             </div>
-            <div class="service-card">
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
                 <h3>Datenanalyse & Excel</h3>
-                <p>Erstellung von Auswertungen, Statistiken und Monatsberichten mit Excel, Pivot-Tabellen und Formeln.</p>
+                <p>Erstellung von Auswertungen, Statistiken und Monatsberichten mit Excel, Pivot-Tabellen und komplexen Formeln zur Prozessoptimierung.</p>
             </div>
-            <div class="service-card">
+            <div class="skill-card">
+                <div class="skill-icon">🤝</div>
                 <h3>Kommunikation & Zusammenarbeit</h3>
-                <p>Koordination mit Steuerberatern, Krankenkassen und Behörden im Rahmen der laufenden Lohnabrechnung.</p>
+                <p>Koordination mit Steuerberatern, Krankenkassen und Behörden im Rahmen der laufenden Lohnabrechnung und bei Sonderfällen.</p>
             </div>
         </div>
     </section>
 
-    <!-- Kontakt -->
+    <!-- Experience Timeline -->
+    <section id="experience">
+        <h2 class="section-title">Beruflicher Werdegang</h2>
+        <p class="section-subtitle">Kontinuierliche Entwicklung und Spezialisierung im Lohnwesen</p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Aktuell</div>
+                <h3>Weiterbildung: Fachassistent Lohn und Gehalt</h3>
+                <p>Vertiefung der Kenntnisse in Steuerrecht, Sozialversicherung und komplexen Abrechnungsfällen zur Erlangung der Qualifikation als Fachassistent Lohn und Gehalt.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Berufserfahrung</div>
+                <h3>Lohnbuchhalter (Vollzeit)</h3>
+                <p>Verantwortung für die vollständige Lohn- und Gehaltsabrechnung, Betreuung von Mitarbeiterstammdaten, Erstellung von Auswertungen und Zusammenarbeit mit externen Partnern.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Qualifikationen</div>
+                <h3>Fundierte Ausbildung im Lohnwesen</h3>
+                <p>Umfassende Kenntnisse in Lohnsteuer, Sozialversicherung, Arbeitsrecht sowie sicherer Umgang mit gängiger Abrechnungssoftware und Excel.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Kontakt</h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h3>Email</h3>
-                    <p>ihre.email@beispiel.de</p>
+        <p class="section-subtitle">Nehmen Sie gerne Kontakt mit mir auf</p>
+        <div class="contact-wrapper">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h3>E-Mail</h3>
+                            <p>ihre.email@beispiel.de</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-details">
+                            <h3>Telefon</h3>
+                            <p>+49 123 456789</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h3>Standort</h3>
+                            <p>Deutschland</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <h3>Telefon</h3>
-                    <p>+49 123 456789</p>
-                </div>
-                <div class="contact-item">
-                    <h3>Standort</h3>
-                    <p>Deutschland</p>
-                </div>
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Ihr Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Ihre E-Mail-Adresse</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Ihre Nachricht</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit">Nachricht senden</button>
+                </form>
             </div>
-            <form class="contact-form" onsubmit="handleSubmit(event)">
-                <input type="text" id="name" placeholder="Ihr Name" required>
-                <input type="email" id="email" placeholder="Ihre E-Mail-Adresse" required>
-                <textarea id="message" placeholder="Ihre Nachricht..." required></textarea>
-                <button type="submit">Nachricht senden</button>
-            </form>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; <span id="year"></span> Hani Allam – Lohnbuchhalter & Fachassistent Lohn und Gehalt (in Weiterbildung).</p>
-        <p>Diese Webseite dient ausschließlich der Darstellung meiner beruflichen Kenntnisse.  
-        Eine steuerliche Beratung oder Lohnabrechnung für Dritte wird nicht angeboten.</p>
+        <div class="footer-content">
+            <p>&copy; <span id="year"></span> Hani Allam – Lohnbuchhalter & Fachassistent Lohn und Gehalt (in Weiterbildung)</p>
+            <div class="footer-divider"></div>
+            <p>Diese Webseite dient ausschließlich der Darstellung meiner beruflichen Kenntnisse und Qualifikationen.</p>
+            <p>Eine steuerliche Beratung oder Lohnabrechnung für Dritte wird nicht angeboten.</p>
+        </div>
     </footer>
 
     <script>
@@ -297,6 +807,38 @@
             alert(`Vielen Dank für Ihre Nachricht, ${name}! Ich melde mich in Kürze bei Ihnen.`);
             event.target.reset();
         }
+
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.remove('active');
+        }
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
